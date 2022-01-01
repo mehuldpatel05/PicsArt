@@ -1,3 +1,16 @@
-PODFILE CHECKSUM: c60ffc0f5b07edf8fb7c67784c83285ac7ec5fbb
+PODS:
+  - BSImagePicker (3.3.1)
+
+DEPENDENCIES:
+  - BSImagePicker (~> 3.1)
+
+SPEC REPOS:
+  trunk:
+    - BSImagePicker
+
+SPEC CHECKSUMS:
+  BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+
+PODFILE CHECKSUM: 740abee471b749fdfd291a807e104bdcf781547c
 
 COCOAPODS: 1.11.2

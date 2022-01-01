@@ -7,10 +7,13 @@
 
 import UIKit
 import Photos
+import BSImagePicker
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var thumbnailImageArray = [UIImage]()
+    let imagePicker = ImagePickerController()
+
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -20,6 +23,36 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         photoCollectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCell")
     }
 
+    func imagePickerSetup() {
+        imagePicker.settings.theme.selectionStyle = .checked
+        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
+        
+        self.presentImagePicker(imagePicker, select: { (asset) in
+            print("Selected: \(asset)")
+        }, deselect: { (asset) in
+            print("Deselected: \(asset)")
+        }, cancel: { (assets) in
+            print("Canceled with selections: \(assets)")
+            if assets.count > 0 {
+                for i in 0..<assets.count{
+                    self.imagePicker.deselect(asset: assets[i])
+                }
+            }
+        }, finish: { (assets) in
+            print("Finished with selections: \(assets)")
+            self.photoCollectionView.reloadData()
+            if assets.count > 0 {
+                for i in 0..<assets.count{
+                    let currentImage = self.getThumbnail(asset: assets[i])
+                    self.thumbnailImageArray.append(currentImage!)
+                    self.imagePicker.deselect(asset: assets[i])
+                }
+            }
+        }, completion: {
+            let finish = Date()
+        })
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // Set the number of items in your collection view.
         if thumbnailImageArray.count == 0 {
@@ -38,9 +71,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if indexPath.item == 0 {
             cell.thumbnailImageView.image = UIImage(named: "plusimage.png")
         }else{
-            for i in 0..<thumbnailImageArray.count{
-                cell.thumbnailImageView.image = thumbnailImageArray[i]
-            }
+            cell.thumbnailImageView.image = thumbnailImageArray[indexPath.item - 1]
         }
 
         return cell
@@ -49,6 +80,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
             print("Open Photo gallery")
+            imagePickerSetup()
         }
         else {
             print("Go inside photo editor view")
