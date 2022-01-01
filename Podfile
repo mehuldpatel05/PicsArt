@@ -6,7 +6,7 @@ target 'PicsArt' do
   use_frameworks!
 
   # Pods for PicsArt
-pod 'AssetsPickerViewController', '~> 2.0'
+#pod 'AssetsPickerViewController', '~> 2.0'
 
 
 end

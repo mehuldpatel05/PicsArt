@@ -1,20 +1,3 @@
-PODS:
-  - AssetsPickerViewController (2.9.7):
-    - SnapKit
-  - SnapKit (5.0.1)
-
-DEPENDENCIES:
-  - AssetsPickerViewController (~> 2.0)
-
-SPEC REPOS:
-  trunk:
-    - AssetsPickerViewController
-    - SnapKit
-
-SPEC CHECKSUMS:
-  AssetsPickerViewController: 4343e10ace86e425097043c17efa145c1ec868ce
-  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-
-PODFILE CHECKSUM: 3cfae7578784cb01f5e68f69d4ef3ee21d114998
+PODFILE CHECKSUM: c60ffc0f5b07edf8fb7c67784c83285ac7ec5fbb
 
 COCOAPODS: 1.11.2
