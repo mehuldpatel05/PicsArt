@@ -6,19 +6,16 @@
 //
 
 import UIKit
-import AssetsPickerViewController
 import Photos
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AssetsPickerViewControllerDelegate {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    let picker = AssetsPickerViewController()
     var thumbnailImageArray = [UIImage]()
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Pics Art"
-        picker.pickerDelegate = self
         // Do any additional setup after loading the view.
         photoCollectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCell")
     }
@@ -52,27 +49,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
             print("Open Photo gallery")
-            present(picker, animated: true, completion: nil)
         }
         else {
             print("Go inside photo editor view")
         }
     }
     
-    func assetsPicker(controller: AssetsPickerViewController, selected assets: [PHAsset]) {
-        let selectedAssets = controller.selectedAssets
-        print("assets Count  \(selectedAssets.count)")
-        
-        if selectedAssets.count > 0 {
-            for i in 0..<selectedAssets.count {
-                let thumnailImage = getThumbnail(asset: selectedAssets[i])
-                print("thumnailImage \(thumnailImage)")
-                thumbnailImageArray.append(thumnailImage!)
-            }
-            photoCollectionView.reloadData()
-        }
-    }
-
     func getThumbnail(asset: PHAsset) -> UIImage? {
         var thumbnail : UIImage?
         
