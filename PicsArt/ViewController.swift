@@ -40,13 +40,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
         }, finish: { (assets) in
             print("Finished with selections: \(assets)")
-            self.photoCollectionView.reloadData()
             if assets.count > 0 {
                 for i in 0..<assets.count{
                     let currentImage = self.getThumbnail(asset: assets[i])
                     self.thumbnailImageArray.append(currentImage!)
                     self.imagePicker.deselect(asset: assets[i])
                 }
+                self.photoCollectionView.reloadData()
             }
         }, completion: {
             let finish = Date()
@@ -61,7 +61,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         else{
             return thumbnailImageArray.count + 1
         }
-        
     }
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
