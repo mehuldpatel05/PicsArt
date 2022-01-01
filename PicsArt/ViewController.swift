@@ -83,6 +83,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         else {
             print("Go inside photo editor view")
+            let photoeditorViewCtrl = PhotoEditorViewController()
+            photoeditorViewCtrl.previewImage = thumbnailImageArray[indexPath.item - 1]
+            self.navigationController?.pushViewController(photoeditorViewCtrl, animated: true)
         }
     }
     
@@ -95,7 +98,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         options.version = .original
         options.isSynchronous = true
         
-        manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFit, options: options, resultHandler: { image, _ in
+        manager.requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: options, resultHandler: { image, _ in
             thumbnail = image!
         })
         return thumbnail

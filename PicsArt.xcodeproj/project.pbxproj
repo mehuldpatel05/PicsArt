@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B2445619DBBE2107E949AAAF /* Pods_PicsArt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C437116AC17EBE3D95702F /* Pods_PicsArt.framework */; };
+		EC6D2A6F2780610A0085C94A /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6D2A6D2780610A0085C94A /* PhotoEditorViewController.swift */; };
+		EC6D2A702780610A0085C94A /* PhotoEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC6D2A6E2780610A0085C94A /* PhotoEditorViewController.xib */; };
 		EC9E2780277D97AB0001DEE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9E277F277D97AB0001DEE5 /* AppDelegate.swift */; };
 		EC9E2782277D97AB0001DEE5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9E2781277D97AB0001DEE5 /* SceneDelegate.swift */; };
 		EC9E2789277D97AC0001DEE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC9E2788277D97AC0001DEE5 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 		0D0580330E008700332F12AD /* Pods-PicsArt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicsArt.debug.xcconfig"; path = "Target Support Files/Pods-PicsArt/Pods-PicsArt.debug.xcconfig"; sourceTree = "<group>"; };
 		1F087A172F6CE844D7BBB9F1 /* Pods-PicsArt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicsArt.release.xcconfig"; path = "Target Support Files/Pods-PicsArt/Pods-PicsArt.release.xcconfig"; sourceTree = "<group>"; };
 		75C437116AC17EBE3D95702F /* Pods_PicsArt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PicsArt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6D2A6D2780610A0085C94A /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
+		EC6D2A6E2780610A0085C94A /* PhotoEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoEditorViewController.xib; sourceTree = "<group>"; };
 		EC9E277C277D97AB0001DEE5 /* PicsArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicsArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC9E277F277D97AB0001DEE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC9E2781277D97AB0001DEE5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +64,6 @@
 				0D0580330E008700332F12AD /* Pods-PicsArt.debug.xcconfig */,
 				1F087A172F6CE844D7BBB9F1 /* Pods-PicsArt.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -89,6 +92,8 @@
 				EC9E2781277D97AB0001DEE5 /* SceneDelegate.swift */,
 				EC9E2793277D98E60001DEE5 /* ViewController.swift */,
 				EC9E2794277D98E60001DEE5 /* ViewController.xib */,
+				EC6D2A6D2780610A0085C94A /* PhotoEditorViewController.swift */,
+				EC6D2A6E2780610A0085C94A /* PhotoEditorViewController.xib */,
 				EC9E2797277DC8140001DEE5 /* PhotoCell.swift */,
 				EC9E2798277DC8140001DEE5 /* PhotoCell.xib */,
 				EC9E2788277D97AC0001DEE5 /* Assets.xcassets */,
@@ -158,6 +163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC6D2A702780610A0085C94A /* PhotoEditorViewController.xib in Resources */,
 				EC9E279A277DC8140001DEE5 /* PhotoCell.xib in Resources */,
 				EC9E278C277D97AC0001DEE5 /* LaunchScreen.storyboard in Resources */,
 				EC9E2796277D98E60001DEE5 /* ViewController.xib in Resources */,
@@ -218,6 +224,7 @@
 				EC9E2795277D98E60001DEE5 /* ViewController.swift in Sources */,
 				EC9E2780277D97AB0001DEE5 /* AppDelegate.swift in Sources */,
 				EC9E2782277D97AB0001DEE5 /* SceneDelegate.swift in Sources */,
+				EC6D2A6F2780610A0085C94A /* PhotoEditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
