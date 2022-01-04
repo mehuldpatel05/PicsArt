@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B2445619DBBE2107E949AAAF /* Pods_PicsArt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C437116AC17EBE3D95702F /* Pods_PicsArt.framework */; };
+		EC187627278302830055EDE9 /* Picsart.db in Resources */ = {isa = PBXBuildFile; fileRef = EC187626278302830055EDE9 /* Picsart.db */; };
+		EC18762B278303D40055EDE9 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC187629278303D40055EDE9 /* DBManager.m */; };
 		EC6D2A6F2780610A0085C94A /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6D2A6D2780610A0085C94A /* PhotoEditorViewController.swift */; };
 		EC6D2A702780610A0085C94A /* PhotoEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC6D2A6E2780610A0085C94A /* PhotoEditorViewController.xib */; };
 		EC9E2780277D97AB0001DEE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9E277F277D97AB0001DEE5 /* AppDelegate.swift */; };
@@ -24,6 +26,10 @@
 		0D0580330E008700332F12AD /* Pods-PicsArt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicsArt.debug.xcconfig"; path = "Target Support Files/Pods-PicsArt/Pods-PicsArt.debug.xcconfig"; sourceTree = "<group>"; };
 		1F087A172F6CE844D7BBB9F1 /* Pods-PicsArt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicsArt.release.xcconfig"; path = "Target Support Files/Pods-PicsArt/Pods-PicsArt.release.xcconfig"; sourceTree = "<group>"; };
 		75C437116AC17EBE3D95702F /* Pods_PicsArt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PicsArt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC187626278302830055EDE9 /* Picsart.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Picsart.db; sourceTree = "<group>"; };
+		EC187628278303D30055EDE9 /* PicsArt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PicsArt-Bridging-Header.h"; sourceTree = "<group>"; };
+		EC187629278303D40055EDE9 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		EC18762A278303D40055EDE9 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		EC6D2A6D2780610A0085C94A /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
 		EC6D2A6E2780610A0085C94A /* PhotoEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoEditorViewController.xib; sourceTree = "<group>"; };
 		EC9E277C277D97AB0001DEE5 /* PicsArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicsArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +73,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		EC18762C278303E50055EDE9 /* Extra Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EC187626278302830055EDE9 /* Picsart.db */,
+				EC18762A278303D40055EDE9 /* DBManager.h */,
+				EC187629278303D40055EDE9 /* DBManager.m */,
+			);
+			path = "Extra Classes";
+			sourceTree = "<group>";
+		};
 		EC9E2773277D97AA0001DEE5 = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +114,9 @@
 				EC9E2798277DC8140001DEE5 /* PhotoCell.xib */,
 				EC9E2788277D97AC0001DEE5 /* Assets.xcassets */,
 				EC9E278A277D97AC0001DEE5 /* LaunchScreen.storyboard */,
+				EC18762C278303E50055EDE9 /* Extra Classes */,
 				EC9E278D277D97AC0001DEE5 /* Info.plist */,
+				EC187628278303D30055EDE9 /* PicsArt-Bridging-Header.h */,
 			);
 			path = PicsArt;
 			sourceTree = "<group>";
@@ -137,6 +155,7 @@
 				TargetAttributes = {
 					EC9E277B277D97AB0001DEE5 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -167,6 +186,7 @@
 				EC9E279A277DC8140001DEE5 /* PhotoCell.xib in Resources */,
 				EC9E278C277D97AC0001DEE5 /* LaunchScreen.storyboard in Resources */,
 				EC9E2796277D98E60001DEE5 /* ViewController.xib in Resources */,
+				EC187627278302830055EDE9 /* Picsart.db in Resources */,
 				EC9E2789277D97AC0001DEE5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,6 +243,7 @@
 				EC9E2799277DC8140001DEE5 /* PhotoCell.swift in Sources */,
 				EC9E2795277D98E60001DEE5 /* ViewController.swift in Sources */,
 				EC9E2780277D97AB0001DEE5 /* AppDelegate.swift in Sources */,
+				EC18762B278303D40055EDE9 /* DBManager.m in Sources */,
 				EC9E2782277D97AB0001DEE5 /* SceneDelegate.swift in Sources */,
 				EC6D2A6F2780610A0085C94A /* PhotoEditorViewController.swift in Sources */,
 			);
@@ -364,6 +385,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XZJD36PUZW;
@@ -382,6 +404,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sparrow.PicsArt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "PicsArt/PicsArt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -393,6 +417,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XZJD36PUZW;
@@ -411,6 +436,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sparrow.PicsArt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "PicsArt/PicsArt-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
