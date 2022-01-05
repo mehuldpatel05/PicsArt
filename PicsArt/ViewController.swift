@@ -24,11 +24,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
       
         dbMGR = DBManager.init(databaseFilename: "Picsart.db")
         
+        let imageSelectBtn = UIBarButtonItem(title: "Select", style: .done, target: self, action: #selector(selectImageForDelete))
+        self.navigationItem.rightBarButtonItem = imageSelectBtn
+        
         // Do any additional setup after loading the view.
         photoCollectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCell")
+        photoCollectionView.allowsMultipleSelection = true
         fetchLastIDFromDB()
         
         self.fetchImagesFromDatabase()
+    }
+    
+    @objc func selectImageForDelete() {
+        print("Select Image")
     }
     
     func fetchLastIDFromDB() {
@@ -141,8 +149,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let photoeditorViewCtrl = PhotoEditorViewController()
             photoeditorViewCtrl.previewImage = thumbnailImageArray[indexPath.item - 1]
             self.navigationController?.pushViewController(photoeditorViewCtrl, animated: true)
+            
+            var cell = collectionView.cellForItem(at: indexPath)
+            if cell?.isSelected == true {
+                cell?.backgroundColor = .orange
+            }
+
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        var cell = collectionView.cellForItem(at: indexPath)
+        cell?.backgroundColor = .clear
+    }
+
         
     func saveImageInFilemanager(imageName: String, image: UIImage) {
         
