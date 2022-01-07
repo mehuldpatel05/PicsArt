@@ -12,20 +12,25 @@ import BSImagePicker
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var thumbnailImageArray = [UIImage]()
+    var currentImgNameArray = [String]()
     let imagePicker = ImagePickerController()
     var dbMGR : DBManager!
     var imageIdCounter : Int = 0
-    
+    var isSelectEnabled = true
+    var imageSelectBarBtn = UIBarButtonItem()
+    var deleteBarBtn = UIBarButtonItem()
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Pics Art"
-      
+        
         dbMGR = DBManager.init(databaseFilename: "Picsart.db")
         
-        let imageSelectBtn = UIBarButtonItem(title: "Select", style: .done, target: self, action: #selector(selectImageForDelete))
-        self.navigationItem.rightBarButtonItem = imageSelectBtn
+        imageSelectBarBtn = UIBarButtonItem(title: "Select", style: .done, target: self, action: #selector(selectImageForDelete))
+        self.navigationItem.rightBarButtonItem = imageSelectBarBtn
+        
+        
         
         // Do any additional setup after loading the view.
         photoCollectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCell")
@@ -37,6 +42,40 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @objc func selectImageForDelete() {
         print("Select Image")
+        if isSelectEnabled == true {
+            imageSelectBarBtn.title = "Cancel"
+            deleteBarBtn = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteBtnAction))
+            self.navigationItem.leftBarButtonItem = deleteBarBtn
+            isSelectEnabled = false
+        }
+        else {
+            imageSelectBarBtn.title = "Select"
+            self.navigationItem.leftBarButtonItem  = nil
+            isSelectEnabled = true
+        }
+    }
+    
+    @objc func deleteBtnAction() {
+        print("deleteBtnAction")
+        let items = photoCollectionView.indexPathsForSelectedItems
+        if items!.count > 0 {
+            for item in 0..<items!.count {
+                print("item \(items![item])")
+                let currentItem = (items![item])
+                let currentIndex = currentItem[1]
+                print("currentIndex \(currentIndex)")
+                let imageName = currentImgNameArray[currentIndex-1]
+                deleteImageFromDisk(fileName: "\(imageName)")
+                let deleteImgQuery = "DELETE FROM Images WHERE id IS \(imageName)"
+                dbMGR.executeQuery(deleteImgQuery)
+                
+                photoCollectionView.deselectItem(at: currentItem, animated:true)
+                if let cell = photoCollectionView.cellForItem(at: currentItem) as? PhotoCell {
+                    cell.backgroundColor = .clear
+                }
+            }
+            fetchImagesFromDatabase()
+        }
     }
     
     func fetchLastIDFromDB() {
@@ -53,6 +92,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func fetchImagesFromDatabase(){
         thumbnailImageArray.removeAll()
+        currentImgNameArray.removeAll()
         let selectImagesQuery = "Select * from Images"
         let imagesTblArray : NSArray = self.dbMGR.loadData(fromDB: selectImagesQuery)! as NSArray
         if imagesTblArray.count > 0 {
@@ -60,12 +100,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 let currentImageArray = imagesTblArray[i] as! NSArray
                 let currentImgName = currentImageArray[1] as! String
                 let curerntImage = loadImageFromDiskWith(fileName: "\(currentImgName).png")
+                currentImgNameArray.append(currentImgName)
                 thumbnailImageArray.append(curerntImage!)
             }
-            self.photoCollectionView.reloadData()
         }
+        self.photoCollectionView.reloadData()
     }
-
+    
     func insertImagePathInDB(currentImgCounter: Int) {
         let imageInsertQuery = "insert into Images(imagepath) VALUES ('\(currentImgCounter)')"
         self.dbMGR.executeQuery(imageInsertQuery)
@@ -85,7 +126,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         })
         return thumbnail
     }
-
+    
     func imagePickerSetup() {
         imagePicker.settings.theme.selectionStyle = .checked
         imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
@@ -148,13 +189,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         else {
             let photoeditorViewCtrl = PhotoEditorViewController()
             photoeditorViewCtrl.previewImage = thumbnailImageArray[indexPath.item - 1]
-            self.navigationController?.pushViewController(photoeditorViewCtrl, animated: true)
+            //            self.navigationController?.pushViewController(photoeditorViewCtrl, animated: true)
             
             var cell = collectionView.cellForItem(at: indexPath)
             if cell?.isSelected == true {
                 cell?.backgroundColor = .orange
             }
-
         }
     }
     
@@ -162,8 +202,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var cell = collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = .clear
     }
-
-        
+    
+    
     func saveImageInFilemanager(imageName: String, image: UIImage) {
         
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
@@ -201,4 +241,39 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return nil
     }
     
+    func deleteImageFromDisk(fileName: String) {
+
+        let fileNameToDelete = "\(fileName)" + ".png"
+        var filePath = ""
+        
+        // Find documents directory on device
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentDirectory = paths[0]
+        filePath = documentDirectory.appendingFormat("/" + fileNameToDelete)
+        
+        do {
+            let fileManager = FileManager.default
+            
+            // Check if file exists
+            if fileManager.fileExists(atPath: filePath) {
+                // Delete file
+                try fileManager.removeItem(atPath: filePath)
+            } else {
+                print("File does not exist")
+            }
+            
+        }
+        catch let error as NSError {
+            print("An error took place: \(error)")
+        }
+        
+    }
+    
+}
+
+extension UICollectionView {
+    func deselectAllItems(animated: Bool) {
+        guard let selectedItems = indexPathsForSelectedItems else { return }
+        for indexPath in selectedItems { deselectItem(at: indexPath, animated: animated) }
+    }
 }
