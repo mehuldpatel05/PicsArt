@@ -189,11 +189,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         else {
             let photoeditorViewCtrl = PhotoEditorViewController()
             photoeditorViewCtrl.previewImage = thumbnailImageArray[indexPath.item - 1]
-            //            self.navigationController?.pushViewController(photoeditorViewCtrl, animated: true)
-            
-            var cell = collectionView.cellForItem(at: indexPath)
-            if cell?.isSelected == true {
-                cell?.backgroundColor = .orange
+            if isSelectEnabled == true {
+                self.navigationController?.pushViewController(photoeditorViewCtrl, animated: true)
+            }
+            else {
+                var cell = collectionView.cellForItem(at: indexPath)
+                if cell?.isSelected == true {
+                    cell?.backgroundColor = .orange
+                }
             }
         }
     }
@@ -202,7 +205,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var cell = collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = .clear
     }
-    
     
     func saveImageInFilemanager(imageName: String, image: UIImage) {
         
@@ -253,7 +255,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         do {
             let fileManager = FileManager.default
-            
             // Check if file exists
             if fileManager.fileExists(atPath: filePath) {
                 // Delete file
@@ -261,12 +262,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             } else {
                 print("File does not exist")
             }
-            
         }
         catch let error as NSError {
             print("An error took place: \(error)")
         }
-        
     }
     
 }
