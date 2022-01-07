@@ -1,16 +1,20 @@
 PODS:
   - BSImagePicker (3.3.1)
+  - LinearProgressBar (1.0.2)
 
 DEPENDENCIES:
   - BSImagePicker (~> 3.1)
+  - LinearProgressBar
 
 SPEC REPOS:
   trunk:
     - BSImagePicker
+    - LinearProgressBar
 
 SPEC CHECKSUMS:
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+  LinearProgressBar: 619d6f286b608e501f39406557f60cdab3faf910
 
-PODFILE CHECKSUM: 740abee471b749fdfd291a807e104bdcf781547c
+PODFILE CHECKSUM: 41b0e2266136c7ebd82a00b3bb7e0f73bfb9546f
 
 COCOAPODS: 1.11.2

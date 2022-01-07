@@ -7,5 +7,6 @@ target 'PicsArt' do
 
   # Pods for PicsArt
 pod "BSImagePicker", "~> 3.1"
+pod "LinearProgressBar"
 
 end

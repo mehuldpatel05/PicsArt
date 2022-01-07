@@ -23,7 +23,6 @@ class PhotoEditorViewController: UIViewController, UICollectionViewDelegate, UIC
         effectsCollectionView.dataSource = self
         
         effectsCollectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCell")
-
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

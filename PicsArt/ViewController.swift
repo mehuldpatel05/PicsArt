@@ -19,6 +19,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var isSelectEnabled = true
     var imageSelectBarBtn = UIBarButtonItem()
     var deleteBarBtn = UIBarButtonItem()
+
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
     override func viewDidLoad() {
