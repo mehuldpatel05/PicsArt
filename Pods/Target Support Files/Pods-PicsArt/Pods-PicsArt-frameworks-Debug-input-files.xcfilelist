@@ -1,3 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-PicsArt/Pods-PicsArt-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/BSImagePicker/BSImagePicker.framework
-${BUILT_PRODUCTS_DIR}/LinearProgressBar/LinearProgressBar.framework
+${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework

@@ -8,6 +8,7 @@
 import UIKit
 import Photos
 import BSImagePicker
+import JGProgressHUD
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -19,6 +20,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var isSelectEnabled = true
     var imageSelectBarBtn = UIBarButtonItem()
     var deleteBarBtn = UIBarButtonItem()
+    var loadingIndicator = JGProgressHUD()
 
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
@@ -39,6 +41,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         fetchLastIDFromDB()
         
         self.fetchImagesFromDatabase()
+    }
+    
+    func displayLoadingIndicator() {
+        loadingIndicator.textLabel.text = "Importing Images"
+        loadingIndicator.style = .dark
+        loadingIndicator.show(in: self.view)
     }
     
     @objc func selectImageForDelete() {
@@ -145,16 +153,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
         }, finish: { (assets) in
             print("Finished with selections: \(assets)")
+            self.displayLoadingIndicator()
             if assets.count > 0 {
-                for i in 0..<assets.count{
-                    let currentImage = self.getThumbnail(asset: assets[i])
-                    self.imageIdCounter = self.imageIdCounter + 1
-                    self.insertImagePathInDB(currentImgCounter: self.imageIdCounter)
-                    self.saveImageInFilemanager(imageName: "\(self.imageIdCounter).png", image: currentImage!)
-                    
-                    self.imagePicker.deselect(asset: assets[i])
+                DispatchQueue.main.asyncAfter(deadline: .now()  + 0.2) {
+                    for i in 0..<assets.count{
+                        let currentImage = self.getThumbnail(asset: assets[i])
+                        self.imageIdCounter = self.imageIdCounter + 1
+                        self.insertImagePathInDB(currentImgCounter: self.imageIdCounter)
+                        self.saveImageInFilemanager(imageName: "\(self.imageIdCounter).png", image: currentImage!)
+                        
+                        self.imagePicker.deselect(asset: assets[i])
+                    }
+                    self.fetchImagesFromDatabase()
+                    self.loadingIndicator.dismiss(animated: true)
                 }
-                self.fetchImagesFromDatabase()
             }
         }, completion: {
             let finish = Date()

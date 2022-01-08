@@ -1,20 +1,20 @@
 PODS:
   - BSImagePicker (3.3.1)
-  - LinearProgressBar (1.0.2)
+  - JGProgressHUD (2.2)
 
 DEPENDENCIES:
   - BSImagePicker (~> 3.1)
-  - LinearProgressBar
+  - JGProgressHUD
 
 SPEC REPOS:
   trunk:
     - BSImagePicker
-    - LinearProgressBar
+    - JGProgressHUD
 
 SPEC CHECKSUMS:
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
-  LinearProgressBar: 619d6f286b608e501f39406557f60cdab3faf910
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
 
-PODFILE CHECKSUM: 41b0e2266136c7ebd82a00b3bb7e0f73bfb9546f
+PODFILE CHECKSUM: f207b7d4766a6e055fad7950196552c14b00b930
 
 COCOAPODS: 1.11.2
